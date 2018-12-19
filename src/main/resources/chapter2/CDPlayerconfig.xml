@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+        <!--第一件需要注意的事情就是你不再需要直接负责创建SgtPeppers的-->
+        <!--实例，在基于JavaConfig的配置中，我们是需要这样做的。当Spring发-->
+        <!--现这个<bean>元素时，它将会调用SgtPeppers的默认构造器来创-->
+        <!--建bean。在XML配置中，bean的创建显得更加被动，不过，它并没有-->
+        <!--JavaConfig那样强大，在JavaConfig配置方式中，你可以通过任何可以-->
+        <!--想象到的方法来创建bean实例。-->
+        <!--另外一个需要注意到的事情就是，在这个简单的<bean>声明中，我-->
+        <!--们将bean的类型以字符串的形式设置在了class属性中。谁能保证设-->
+        <!--置给class属性的值是真正的类呢？Spring的XML配置并不能从编译-->
+        <!--期的类型检查中受益。即便它所引用的是实际的类型，如果你重命名-->
+        <!--了类，会发生什么呢？-->
+        <!--借助IDE检查XML的合法性使用能够感知Spring功能的IDE，如-->
+        <!--Spring Tool Suite，能够在很大程度上帮助你确保Spring XML配置-->
+        <!--的合法性。-->
+        <!--以上介绍的只是JavaConfig要优于XML配置的部分原因。我建议在为-->
+        <!--你的应用选择配置风格时，要记住XML配置的这些缺点。接下来，我-->
+        <!--们继续Spring XML配置的学习进程，了解如何将SgtPeppersbean注-->
+        <!--入到CDPlayer之中。-->
+
+        <!--方式一-->
+        <bean id="sgtPeppers" class="com.zhhp.chapter2.SgtPeppers"/>
+
+        <bean id="cdPlayer" class="com.zhhp.chapter2.CDPlayer">
+                <constructor-arg ref="sgtPeppers"/>
+        </bean>
+
+        <!--方式二-->
+        <!--<bean id="cdPlayer" class="com.zhhp.chapter2.CDPlayer" c:cd-ref="sgtPeppers">-->
+</beans>
